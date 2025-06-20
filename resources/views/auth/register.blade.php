@@ -41,6 +41,19 @@
                         </div>
 
                         <div class="input-group mb-3">
+                            <input type="tel" name="phone_number" value="{{ old('phone_number') }}"
+                                class="form-control @error('phone_number') is-invalid @enderror" placeholder="Phone">
+                            <div class="input-group-append">
+                                <div class="input-group-text"><span class="fas fa-phone"></span></div>
+                            </div>
+                            @error('phone_number')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="input-group mb-3">
                             <input type="password" name="password"
                                 class="form-control @error('password') is-invalid @enderror" placeholder="Password">
                             <div class="input-group-append">
