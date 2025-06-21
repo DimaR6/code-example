@@ -41,7 +41,7 @@ class LuckyDrawController extends AppBaseController
     {
         $this->luckyDrawService->makeRoll();
 
-        Flash::success('Lucky Draw saved successfully.');
+        Flash::success('Roll The Dice result saved successfully.');
 
         return redirect(route('luckyDraws.index'));
     }

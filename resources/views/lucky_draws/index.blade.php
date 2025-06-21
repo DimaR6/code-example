@@ -11,7 +11,7 @@
                 
                 {!! Form::open(['route' => 'luckyDraws.store']) !!}
 
-                {!! Form::submit('Roll The Dice', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Roll The Dice', ['class' => 'btn btn-primary float-right']) !!}
 
                 {!! Form::close() !!}
             </div>
