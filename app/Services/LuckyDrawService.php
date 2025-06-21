@@ -3,9 +3,19 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\LuckyDrawRepository;
 
 class LuckyDrawService
 {
+
+    /** @var LuckyDrawRepository $luckyDrawRepository*/
+    private $luckyDrawRepository;
+
+    public function __construct(LuckyDrawRepository $luckyDrawRepo)
+    {
+        $this->luckyDrawRepository = $luckyDrawRepo;
+    }
+
     private function roll(): array
     {
         $user = Auth::user();
@@ -35,12 +45,10 @@ class LuckyDrawService
         ];
     }
 
-    $luckyDraw = $this->luckyDrawRepository->create($input);
-
-    public function getLuckyDrawHistory(int $userId): array
+    public function makeRoll()
     {
-        // This method should interact with a repository to fetch the user's lucky draw history.
-        // For now, we will return an empty array as a placeholder.
-        return [];
+        return $this->luckyDrawRepository->create(
+            $this->roll()
+        );
     }
 }

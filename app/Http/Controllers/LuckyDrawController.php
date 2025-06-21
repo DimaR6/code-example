@@ -9,15 +9,18 @@ use App\Repositories\LuckyDrawRepository;
 use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Support\Facades\Auth;
+use App\Services\LuckyDrawService;
 
 class LuckyDrawController extends AppBaseController
 {
     /** @var LuckyDrawRepository $luckyDrawRepository*/
     private $luckyDrawRepository;
+    private $luckyDrawService;
 
-    public function __construct(LuckyDrawRepository $luckyDrawRepo)
+    public function __construct(LuckyDrawRepository $luckyDrawRepo, LuckyDrawService $luckyDrawService)
     {
         $this->luckyDrawRepository = $luckyDrawRepo;
+        $this->luckyDrawService = $luckyDrawService;
     }
 
     /**
@@ -34,11 +37,9 @@ class LuckyDrawController extends AppBaseController
     /**
      * Store a newly created LuckyDraw in storage.
      */
-    public function store(CreateLuckyDrawRequest $request)
+    public function store(Request $request)
     {
-        $input = $request->all();
-
-        $luckyDraw = $this->luckyDrawRepository->create($input);
+        $this->luckyDrawService->makeRoll();
 
         Flash::success('Lucky Draw saved successfully.');
 
