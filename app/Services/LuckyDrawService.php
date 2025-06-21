@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LuckyDrawService
 {
-    public function roll(): array
+    private function roll(): array
     {
         $user = Auth::user();
 
@@ -33,5 +33,14 @@ class LuckyDrawService
             'win_amount' => round($winAmount, 2),
             'user_id' => $user->id,
         ];
+    }
+
+    $luckyDraw = $this->luckyDrawRepository->create($input);
+
+    public function getLuckyDrawHistory(int $userId): array
+    {
+        // This method should interact with a repository to fetch the user's lucky draw history.
+        // For now, we will return an empty array as a placeholder.
+        return [];
     }
 }

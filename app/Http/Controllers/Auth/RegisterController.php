@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Services\MagicLinkService;
 
 class RegisterController extends Controller
 {
@@ -30,13 +31,17 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/home';
 
+    private $magicLinkService;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(MagicLinkService $magicLinkService)
     {
+        $this->magicLinkService = $magicLinkService;
+    
         $this->middleware('guest');
     }
 
@@ -64,11 +69,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone_number' => $data['phone_number'],
         ]);
+
+        $this->magicLinkService->createMagicLink([
+            'user_id' => $user->id,
+        ]);
+
+        return $user;
     }
 }

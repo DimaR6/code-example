@@ -8,6 +8,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Repositories\LuckyDrawRepository;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 
 class LuckyDrawController extends AppBaseController
 {
@@ -24,7 +25,7 @@ class LuckyDrawController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $luckyDraws = $this->luckyDrawRepository->latestThree();
+        $luckyDraws = $this->luckyDrawRepository->latestThree(Auth::id());
 
         return view('lucky_draws.index', compact('luckyDraws'));
     }
