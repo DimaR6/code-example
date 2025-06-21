@@ -19,3 +19,5 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
+
+Route::resource('luckyDraws', App\Http\Controllers\LuckyDrawController::class);

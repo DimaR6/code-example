@@ -5,3 +5,10 @@
         <p>Home</p>
     </a>
 </li>
+
+<li class="nav-item">
+    <a href="{{ route('luckyDraws.index') }}" class="nav-link {{ Request::is('luckyDraws*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Lucky Draws</p>
+    </a>
+</li>
