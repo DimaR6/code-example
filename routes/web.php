@@ -21,3 +21,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::resource('luckyDraws', App\Http\Controllers\LuckyDrawController::class);
+Route::resource('magicLinks', App\Http\Controllers\MagicLinkController::class);
