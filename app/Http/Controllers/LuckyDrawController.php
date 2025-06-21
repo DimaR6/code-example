@@ -24,19 +24,11 @@ class LuckyDrawController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $luckyDraws = $this->luckyDrawRepository->paginate(10);
+        $luckyDraws = $this->luckyDrawRepository->latestThree();
 
-        return view('lucky_draws.index')
-            ->with('luckyDraws', $luckyDraws);
+        return view('lucky_draws.index', compact('luckyDraws'));
     }
 
-    /**
-     * Show the form for creating a new LuckyDraw.
-     */
-    public function create()
-    {
-        return view('lucky_draws.create');
-    }
 
     /**
      * Store a newly created LuckyDraw in storage.
@@ -66,63 +58,5 @@ class LuckyDrawController extends AppBaseController
         }
 
         return view('lucky_draws.show')->with('luckyDraw', $luckyDraw);
-    }
-
-    /**
-     * Show the form for editing the specified LuckyDraw.
-     */
-    public function edit($id)
-    {
-        $luckyDraw = $this->luckyDrawRepository->find($id);
-
-        if (empty($luckyDraw)) {
-            Flash::error('Lucky Draw not found');
-
-            return redirect(route('luckyDraws.index'));
-        }
-
-        return view('lucky_draws.edit')->with('luckyDraw', $luckyDraw);
-    }
-
-    /**
-     * Update the specified LuckyDraw in storage.
-     */
-    public function update($id, UpdateLuckyDrawRequest $request)
-    {
-        $luckyDraw = $this->luckyDrawRepository->find($id);
-
-        if (empty($luckyDraw)) {
-            Flash::error('Lucky Draw not found');
-
-            return redirect(route('luckyDraws.index'));
-        }
-
-        $luckyDraw = $this->luckyDrawRepository->update($request->all(), $id);
-
-        Flash::success('Lucky Draw updated successfully.');
-
-        return redirect(route('luckyDraws.index'));
-    }
-
-    /**
-     * Remove the specified LuckyDraw from storage.
-     *
-     * @throws \Exception
-     */
-    public function destroy($id)
-    {
-        $luckyDraw = $this->luckyDrawRepository->find($id);
-
-        if (empty($luckyDraw)) {
-            Flash::error('Lucky Draw not found');
-
-            return redirect(route('luckyDraws.index'));
-        }
-
-        $this->luckyDrawRepository->delete($id);
-
-        Flash::success('Lucky Draw deleted successfully.');
-
-        return redirect(route('luckyDraws.index'));
     }
 }

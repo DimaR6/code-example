@@ -23,4 +23,11 @@ class LuckyDrawRepository extends BaseRepository
     {
         return LuckyDraw::class;
     }
+
+    public function latestThree()
+    {
+        return $this->model->orderBy('created_at', 'desc')
+            ->limit(3)
+            ->get();
+    }
 }

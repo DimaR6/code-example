@@ -65,12 +65,7 @@ use Illuminate\Database\Eloquent\Model;
     ];
 
     public static array $rules = [
-        'hash' => 'required|string|max:36',
-        'user_id' => 'required',
-        'expires_at' => 'required',
         'is_active' => 'required|boolean',
-        'created_at' => 'nullable',
-        'updated_at' => 'nullable'
     ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo

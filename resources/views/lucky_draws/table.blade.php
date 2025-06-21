@@ -34,8 +34,6 @@
     </div>
 
     <div class="card-footer clearfix">
-        <div class="float-right">
-            @include('adminlte-templates::common.paginate', ['records' => $luckyDraws])
-        </div>
+        <div class="float-right"></div>
     </div>
 </div>

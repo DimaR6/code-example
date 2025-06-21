@@ -8,15 +8,18 @@ use App\Http\Controllers\AppBaseController;
 use App\Repositories\MagicLinkRepository;
 use Illuminate\Http\Request;
 use Flash;
+use App\Services\MagicLinkService;
 
 class MagicLinkController extends AppBaseController
 {
     /** @var MagicLinkRepository $magicLinkRepository*/
     private $magicLinkRepository;
+    private $magicLinkService;
 
-    public function __construct(MagicLinkRepository $magicLinkRepo)
+    public function __construct(MagicLinkRepository $magicLinkRepo, MagicLinkService $magicLinkService)
     {
         $this->magicLinkRepository = $magicLinkRepo;
+        $this->magicLinkService = $magicLinkService;
     }
 
     /**
@@ -35,7 +38,9 @@ class MagicLinkController extends AppBaseController
      */
     public function create()
     {
-        return view('magic_links.create');
+        $magicLink = ['user_id' => auth()->id(), 'expires_at' => now()->addDays(7)];
+
+        return view('magic_links.create', compact('magicLink'));
     }
 
     /**
@@ -43,9 +48,11 @@ class MagicLinkController extends AppBaseController
      */
     public function store(CreateMagicLinkRequest $request)
     {
-        $input = $request->all();
+        $isActive = $request->get('is_active');
 
-        $magicLink = $this->magicLinkRepository->create($input);
+        $this->magicLinkService->createMagicLink([
+            'is_active' => $isActive
+        ]);
 
         Flash::success('Magic Link saved successfully.');
 
