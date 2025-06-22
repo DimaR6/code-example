@@ -3,16 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Repositories\MagicLinkRepository;
 
 class HomeController extends Controller
 {
+    
+    private $magicLinkRepository;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(MagicLinkRepository $magicLinkRepository)
     {
+        $this->magicLinkRepository = $magicLinkRepository;
         $this->middleware('auth');
     }
 
@@ -23,6 +28,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $magicLink = $this->magicLinkRepository->getFirtsActiveMagicLinkByUserId(auth()->id());
+        $hash = $magicLink ? $magicLink->hash : null;
+
+        return view('home', compact('hash'));
     }
 }

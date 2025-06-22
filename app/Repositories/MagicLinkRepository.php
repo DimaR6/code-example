@@ -29,4 +29,13 @@ class MagicLinkRepository extends BaseRepository
     {
         return $this->model->where('user_id', $userId)->paginate(10);
     }
+
+    public function getFirtsActiveMagicLinkByUserId(int $userId)
+    {
+        return $this->model->where('user_id', $userId)
+            ->where('is_active', true)
+            ->where('expires_at', '>=', now())
+            ->orderBy('expires_at', 'asc')
+            ->first();
+    }
 }

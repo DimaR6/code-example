@@ -16,7 +16,7 @@
                     <td>{{ $magicLink->hash }}</td>
                     <td>{{ $magicLink->user_id }}</td>
                     <td>{{ $magicLink->expires_at }}</td>
-                    <td>{{ $magicLink->is_active }}</td>
+                    <td>{{ $magicLink->is_active ? 'Active' : 'Inactive' }}</td>
                     <td  style="width: 120px">
                         {!! Form::open(['route' => ['magicLinks.destroy', $magicLink->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
