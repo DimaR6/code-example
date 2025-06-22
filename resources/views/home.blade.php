@@ -4,7 +4,7 @@
 <div class="container-fluid">
     @if ($hash)
     <a class="btn btn-primary"
-        href="{{ route('magicLinks.create') }}">
+        href="{{ route('magicLinks.index') }}">
         {{ $hash}}
     </a>
     @else

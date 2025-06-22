@@ -4,17 +4,35 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
+use App\Repositories\MagicLinkRepository;
 
 class RestrictIfNoActiveMagicLink
 {
+
+    private $magicLinkRepository;
+
     /**
-     * Handle an incoming request.
+     * Create a new controller instance.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @return void
      */
-    public function handle(Request $request, Closure $next): Response
+    public function __construct(MagicLinkRepository $magicLinkRepository)
     {
+        $this->magicLinkRepository = $magicLinkRepository;
+    }
+
+
+    public function handle(Request $request, Closure $next)
+    {
+        $userId = Auth::id(); 
+
+        $magicLink = $this->magicLinkRepository->getFirtsActiveMagicLinkByUserId($userId);
+
+        if (!$magicLink) {
+            return redirect()->route('home')->with('error', 'You do not have an active magic links.');
+        }
+
         return $next($request);
     }
 }

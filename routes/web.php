@@ -20,5 +20,7 @@ Route::get('/', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
 
-Route::resource('luckyDraws', App\Http\Controllers\LuckyDrawController::class);
-Route::resource('magicLinks', App\Http\Controllers\MagicLinkController::class);
+Route::middleware(['auth', 'restrict.no.active.magic.link'])->group(function () {
+    Route::resource('luckyDraws', App\Http\Controllers\LuckyDrawController::class);
+    Route::resource('magicLinks', App\Http\Controllers\MagicLinkController::class);
+});

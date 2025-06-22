@@ -35,7 +35,7 @@ class MagicLinkRepository extends BaseRepository
         return $this->model->where('user_id', $userId)
             ->where('is_active', true)
             ->where('expires_at', '>=', now())
-            ->orderBy('expires_at', 'asc')
+            ->orderBy('expires_at', 'desc')
             ->first();
     }
 }
