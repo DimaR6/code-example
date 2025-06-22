@@ -32,4 +32,11 @@ class LuckyDrawRepository extends BaseRepository
             ->limit(3)
             ->get();
     }
+
+    public function find(int $id, array $columns = ['*'])
+    {
+        return $this->model->where('id', $id)
+            ->where('user_id', Auth::id())
+            ->first($columns);
+    }
 }

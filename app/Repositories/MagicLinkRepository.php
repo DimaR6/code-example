@@ -38,4 +38,11 @@ class MagicLinkRepository extends BaseRepository
             ->orderBy('expires_at', 'desc')
             ->first();
     }
+
+    public function find(int $id, array $columns = ['*'])
+    {
+        return $this->model->where('id', $id)
+            ->where('user_id', Auth::id())
+            ->first($columns);
+    }
 }
