@@ -36,9 +36,15 @@ Enter the container and set up Laravel:
 
 ```bash
 docker exec -it laravel_app bash
+
 composer install
+
 php artisan key:generate
 php artisan migrate
+
+npm install
+npm run build
+
 exit
 ```
 
