@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "🔧 Installing PHP dependencies..."
+composer install
+
 # 🧬 Copy .env.example to .env if it doesn't exist
 if [ ! -f .env ]; then
     echo "📄 .env not found — creating from .env.example"
@@ -7,9 +10,6 @@ if [ ! -f .env ]; then
 else
     echo "✅ .env already exists — skipping"
 fi
-
-echo "🔧 Installing PHP dependencies..."
-composer install
 
 echo "🔐 Generating app key..."
 php artisan key:generate
