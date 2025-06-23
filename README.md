@@ -40,6 +40,7 @@ docker exec -it laravel_app bash
 composer install
 
 php artisan key:generate
+php artisan storage:link
 php artisan migrate
 
 npm install
