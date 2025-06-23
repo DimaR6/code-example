@@ -2,10 +2,15 @@
 
 @section('content')
 <div class="container-fluid">
+
+    <div class="col-sm-6">
+        <h3>Enter App By clicking the button</h3>
+    </div>
+
     @if ($hash)
     <a class="btn btn-primary"
         href="{{ route('magicLinks.index') }}">
-        {{ $hash}}
+        Click here - {{ $hash}}
     </a>
     @else
 
