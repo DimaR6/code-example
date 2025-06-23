@@ -10,6 +10,7 @@ services:
       - .:/var/www/html
     depends_on:
       - db
+    command: ["bash", "-c", "apache2-foreground & sleep 10 && bash ./post-start.sh && tail -f /dev/null"]
     environment:
       - DB_HOST=db
       - DB_PORT=3306
