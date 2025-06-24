@@ -3,6 +3,8 @@
 @section('content')
 <div class="container-fluid">
 
+    @include('flash::message')
+    
     <div class="col-sm-6">
         <h3>Enter App By clicking the button</h3>
     </div>
