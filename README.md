@@ -6,7 +6,7 @@ This project runs Laravel inside Docker using PHP, Apache, and MySQL.
 
 ## 🐳 Start Docker Containers
 
-Build and start the containers. There is script that automates all commands needed to run laravel app so if all goes well you need only this command.
+Build and start the containers. A script automates all necessary commands to run the Laravel app — if all goes well, you’ll only need this one command.
 
 After docker compose you should wait a bit before open link  [http://localhost:8000](http://localhost:8000)
 
