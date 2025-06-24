@@ -29,7 +29,9 @@ class RestrictIfNoActiveMagicLink
 
         $magicLink = $this->magicLinkRepository->getFirtsActiveMagicLinkByUserId($userId);
 
-        if (!$magicLink) {
+        $hashFromUrl = session('active_magic_link_hash');
+
+        if (is_null($magicLink) || $magicLink->hash !== $hashFromUrl) {
             return redirect()->route('home')->with('error', 'You do not have an active magic links.');
         }
 

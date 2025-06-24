@@ -9,7 +9,7 @@
 
     @if ($hash)
     <a class="btn btn-primary"
-        href="{{ route('magicLinks.index') }}">
+        href="{{ route('magic.access', ['hash' => $hash]) }}">
         Click here - {{ $hash}}
     </a>
     @else
